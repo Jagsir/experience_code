@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>functions</groupId>
+    <artifactId>java8</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <spring.version>4.2.1.RELEASE</spring.version>
+        <spring.security.version>4.0.2.RELEASE</spring.security.version>
+        <spring.data.version>1.8.2.RELEASE</spring.data.version>
+        <hibernate-entitymanager.version>5.0.0.Final</hibernate-entitymanager.version>
+        <hibernate.version>${hibernate-entitymanager.version}</hibernate.version>
+        <org.slf4j.version>1.7.12</org.slf4j.version>
+        <jt400.version>5.2.0.0</jt400.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <activemq.version>5.13.0</activemq.version>
+        <javassist.version>3.12.1.GA</javassist.version>
+        <jacoco-maven-version>0.7.5.201505241946</jacoco-maven-version>
+        <tomcat7-maven-version>2.2</tomcat7-maven-version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
