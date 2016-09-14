@@ -5,7 +5,7 @@ import java.util.function.BiFunction;
 
 class MyFolder<T, U> implements Folder<T, U>
 {
-    U foldRecursive(U u, Queue<T> ts, BiFunction<T, U, U> function)
+    public U foldRecursive(U u, Queue<T> ts, BiFunction<T, U, U> function)
     {
         if(u == null || ts == null || function == null)
             throw new IllegalArgumentException();
@@ -17,10 +17,10 @@ class MyFolder<T, U> implements Folder<T, U>
         // The recursive implementation will overflow the stack for
         // any data set of real size, your job is to implement a
         // non-recursive solution
-        return fold(function.apply(ts.poll(), u), ts, function);
+        return foldRecursive(function.apply(ts.poll(), u), ts, function);
     }
 
-    public U fold(U u, Queue<T> ts, BiFunction<T, U, U> function)
+    public U foldNonRecursive(U u, Queue<T> ts, BiFunction<T, U, U> function)
     {
         if(u == null || ts == null || function == null)
             throw new IllegalArgumentException();

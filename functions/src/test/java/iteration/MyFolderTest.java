@@ -1,7 +1,5 @@
 package iteration;
 
-import static org.junit.Assert.*;
-
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.function.BiFunction;
@@ -14,28 +12,59 @@ import org.junit.Test;
  */
 public
 class MyFolderTest {
-    private int size = 300000;
-    private BiFunction<Integer, String, String> function        = (x, y) -> y + "\n" + (x + 1);
-    private String                              formattedString = String.format("here is increment of %d : ", 1);
-    private Queue<Integer>                      integerQueue    = new PriorityQueue<>();
+    //@formatter:off
+    private int                                 sizeSmall         = 11000;
+    private BiFunction<Integer, String, String> strFunction       = (x, y) -> y + "\n" + (x + 1);
+    private String                              formattedString   = String.format("here is increment of %d : ", 1);
+    private Queue<Integer>                      integerQueueSmall = new PriorityQueue<>();
 
-    @Before
-    public
-    void setUp() throws Exception {
-        for (int i = 0; i < size; i++) {
-            integerQueue.add(i);
+    private int                                 sizeLarge         = 500000000;
+    private BiFunction<Long, Long, Long>        intFunction       = (x, y) -> x + y;
+    private Queue<Long>                         longQueueLarge    = new PriorityQueue<>(sizeLarge);
+    private long                                result            = 0;
+    //@formatter:on
+
+    private
+    void setUpSmall() throws Exception {
+        for (int i = 0; i < sizeSmall; i++) {
+            integerQueueSmall.add(i);
+        }
+    }
+
+    private
+    void setUpLarge() throws Exception {
+        for (long i = 0; i < sizeLarge; i++) {
+            longQueueLarge.add(i);
         }
     }
 
     @Test
     public
-    void fold() throws Exception {
-        System.err.println( new MyFolder<Integer, String>().fold(formattedString, integerQueue, function));
+    void foldNR() throws Exception {
+        setUpSmall();
+        String strResult = new MyFolder<Integer, String>().foldNonRecursive(formattedString, integerQueueSmall, strFunction);
+        System.err.println(strResult.substring(strResult.length() - 100));
     }
 
     @Test
     public
     void foldRecursive() throws Exception {
-        System.err.println(new MyFolder<Integer, String>().foldRecursive(formattedString, integerQueue, function));
+        setUpSmall();
+        String strResult = new MyFolder<Integer, String>().foldRecursive(formattedString, integerQueueSmall, strFunction);
+        System.err.println(strResult.substring(strResult.length() - 100));
+    }
+
+    @Test
+    public
+    void foldNRInt() throws Exception {
+        setUpLarge();
+        System.err.println(new MyFolder<Long, Long>().foldNonRecursive(result, longQueueLarge, intFunction));
+    }
+
+    @Test
+    public
+    void foldRecursiveInt() throws Exception {
+        setUpLarge();
+        System.err.println(new MyFolder<Long, Long>().foldRecursive(result, longQueueLarge, intFunction));
     }
 }
